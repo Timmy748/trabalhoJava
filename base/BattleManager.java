@@ -60,7 +60,7 @@ public class BattleManager {
                     }
                 }
             } else {
-                System.out.printf("%s não dropou nada kkkkkkkkkkk", mob.getName());
+                System.out.printf("%s nao dropou nada kkkkkkkkkkk", mob.getName());
             }
         return true;
     }
@@ -107,7 +107,7 @@ public class BattleManager {
                 this.isPlayerTurn = true;
             }
         } else {
-            System.out.println("isso não é um item válido");
+            System.out.println("isso nao é um item válido");
             this.isPlayerTurn = true;
         }
     }
@@ -134,7 +134,7 @@ public class BattleManager {
             System.out.print("> ");
             int choice = this.scan.nextInt();
             if (choice < min || choice > max) {
-                System.out.println("Opção inválida. Tente novamente.");
+                System.out.println("Opçao inválida. Tente novamente.");
                 continue;
             }
             return choice;

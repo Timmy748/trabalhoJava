@@ -1,3 +1,6 @@
+
+# só conta as linhas do código Java
+
 from pathlib import Path
 
 root = Path()

@@ -104,21 +104,22 @@ public class Player extends Character {
     }
 
     public void levelUp(){
-        this.attack += random.nextInt(5) + 1;
-        this.defense += random.nextInt(5) + 1;
-        this.life += random.nextInt(21) + 5;
-        this.currentLife = this.life;
-        this.level++;
-        this.showStats();
+        int xpNeeded = this.level * 100;
+        if(this.experience > xpNeeded){
+            this.experience -= xpNeeded;
+            this.attack += random.nextInt(5) + 1;
+            this.defense += random.nextInt(5) + 1;
+            this.life += random.nextInt(21) + 5;
+            this.currentLife = this.life;
+            this.level++;
+            this.showStats();
+            this.levelUp();
+        }  
     }
 
     public void gainExperience(int xp){
         this.experience += xp;
-        int xpNeeded = this.level * 100;
-        if(this.experience > xpNeeded){
-            this.levelUp();
-            this.experience -= xpNeeded;
-        }
+        this.levelUp();
     }
 
 

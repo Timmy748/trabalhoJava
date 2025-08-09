@@ -8,7 +8,7 @@ import mobs.Mob;
 
 public class Dragao extends Mob {
     public Dragao(int level) {
-        super("Dragão", level,
+        super("Dragao", level,
               200, 20,
               30, 8,
               15, 4);

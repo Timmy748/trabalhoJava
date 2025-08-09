@@ -35,7 +35,7 @@ public class ItemEquipavel extends Item {
 
     private boolean equip(Player player) {
         if (isBroken()) {
-            System.out.println(getName() + " está quebrado e não pode ser equipado!");
+            System.out.println(getName() + " está quebrado e nao pode ser equipado!");
             return false;
         }
         if (equipped) {
@@ -62,7 +62,7 @@ public class ItemEquipavel extends Item {
 
     private boolean unequip(Player player) {
         if (!equipped) {
-            System.out.println(getName() + " não está equipado!");
+            System.out.println(getName() + " nao está equipado!");
             return false;
         }
 
@@ -97,10 +97,10 @@ public class ItemEquipavel extends Item {
     }
 
     public int getAttackBonus() {
-        return (equipped && !isBroken()) ? attackBonus : 0;
+        return !isBroken() ? attackBonus : 0;
     }
     public int getDefenseBonus() {
-        return (equipped && !isBroken()) ? defenseBonus : 0;
+        return !isBroken() ? defenseBonus : 0;
     }
     public int getCurrentDurability() {
         return currentDurability;

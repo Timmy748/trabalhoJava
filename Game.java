@@ -1,8 +1,5 @@
-
-
 import player.Player;
 import base.EventManager;
-import itens.armaduras.ArmaduraDragao;
 import itens.base.Item;
 import itens.base.ItemConsumivel;
 import itens.base.ItemEquipavel;
@@ -10,39 +7,61 @@ import itens.base.ItemEquipavel;
 import java.io.IOException;
 import java.util.Scanner;
 
+// pra rodar o jogo com acentos porque eu nao quero mudar o codigo
+// java -Dfile.encoding=UTF-8 Game.java
+
 public class Game {
     private static final Scanner scan = new Scanner(System.in);
-
+    private static int lvlDungeon = 0;
     public static void main(String[] args) {
-        int lvlDungeon = 1;
+        
 
-        System.out.println("Bem-vindo ao Game Sei lá o que mano kkkkkk");
-        System.out.print("Digite o nome do seu jogador: ");
+        System.out.println("""
+        =================================
+        Bem-vindo ao jogo de RPG!
+        Você é um aventureiro em busca de tesouros e desafios.
+        Você começará no nível 1 e enfrentará monstros em uma dungeon.
+        A cada nível, você ganhará experiência e poderá encontrar itens valiosos.
+        Prepare-se para a aventura!
+        =================================
+                """);
+        System.out.print("Digite seu nome: ");
         String name = scan.nextLine();
 
         Player player = createPlayer(name);
-        player.addItem(new ArmaduraDragao());
         while (player.isAlive()) {
-            clearConsole();
+            Game.lvlDungeon++;
             preEventAction(player);
-            EventManager.generateEvent(lvlDungeon, player);
-            lvlDungeon++;
+            EventManager.generateEvent(Game.lvlDungeon, player);
         }
-        System.out.println("Game Over! Volte sempre :)");
+        Game.clearConsole();
+        System.out.printf("Game Over. você conseguiu chegar ao level %d", Game.lvlDungeon);
         scan.close();
     }
 
     public static Player createPlayer(String name) {
-        return new Player(name, 100, 10, 10);
+        return new Player(name, 100, 15, 15);
     }
 
     private static void preEventAction(Player player) {
         while (true) {
-            System.out.println("\n=== Ações Pré-Evento ===");
-            System.out.println("1) Abrir inventário");
-            System.out.println("2) mostrar status");
-            System.out.println("3) Prosseguir para o Evento");
-            System.out.print("Escolha uma opção: ");
+            Game.clearConsole();
+            System.out.printf("""
+            =================================
+
+            Você está no level %d da dungeon.
+
+            ======= Açoes Pré-Evento ========
+
+            1) Abrir inventário
+            2) Mostrar status
+            3) Prosseguir para o Evento
+
+            =================================
+
+            Escolha uma opçao:
+
+                    """, Game.lvlDungeon);
             String opt = scan.nextLine();
 
             switch (opt) {
@@ -50,23 +69,26 @@ public class Game {
                     openInventory(player);
                     break;
                 case "2":
+                    Game.clearConsole();
                     player.showStats();
+                    System.out.println("Pressione Enter para continuar...");
+                    scan.nextLine();
                     break;
                 case "3":
                     return;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opçao inválida. Tente novamente.");
             }
         }
     }
 
     private static void openInventory(Player player) {
         if (player.getInvetorySize() == 0) {
-            System.out.println("Inventário vazio.");
+            System.out.println("Inventario vazio.");
             return;
         }
         player.showInventory();
-        System.out.print("Escolha índice do item (0 para voltar): ");
+        System.out.println("\nEscolha índice do item (0 para voltar):");
         int idx = readChoice(0, player.getInvetorySize());
         if (idx == 0) return;
 
@@ -79,9 +101,9 @@ public class Game {
         } else if (item instanceof ItemEquipavel) {
             System.out.println("2) Equipar");
         } else {
-            System.out.println("2) (ação não disponível)");
+            System.out.println("2) (açao nao disponível)");
         }
-        System.out.print("Escolha: ");
+        System.out.println("Escolha: ");
         int action = readChoice(1, 2);
 
         if (action == 1) {
@@ -105,6 +127,7 @@ public class Game {
 
 
     private static void showItemDetails(Item item) {
+        System.out.println("\n=== Detalhes do Item ===");
         System.out.printf("Item: %s%n", item.getName());
         System.out.printf("Desc: %s%n", item.getDescription());
         if (item instanceof ItemConsumivel) {
@@ -117,6 +140,7 @@ public class Game {
             System.out.printf("Bônus Atk: +%d, Bônus Def: +%d%n",
                 ie.getAttackBonus(), ie.getDefenseBonus());
         }
+        System.out.println("========================\n");
     }
 
 
@@ -144,7 +168,7 @@ public class Game {
                     return choice;
                 }
             } catch (NumberFormatException ignored) {}
-            System.out.println("Opção inválida. Tente novamente.");
+            System.out.println("Opçao inválida. Tente novamente.");
         }
     }
 }

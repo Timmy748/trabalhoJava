@@ -66,7 +66,7 @@ public class EventManager {
 
     private static Bau createBau(){
         int posicao = EventManager.random.nextInt(EventManager.bausArray.length);
-            switch (EventManager.mobsArray[posicao]) {
+            switch (EventManager.bausArray[posicao]) {
                 case "bau medio":     return new BauMedio();
                 case "bau grande":     return new BauGrande();
                 case "bau de espadas":     return new BauEspadas();
@@ -81,7 +81,7 @@ public class EventManager {
         Bau bau = EventManager.createBau();
         Item[] itensBau = bau.abrir();
         for(Item item:itensBau){
-            System.out.printf("deseja colocar %s no inventario%n", item.getName());
+            System.out.printf("deseja colocar %s no inventario [S] | [N]%n", item.getName());
             String resposta = scan.nextLine();
 
             if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {

@@ -10,7 +10,7 @@ public class BuffManager {
         this.defenseBoost = defenseBoost;
         this.duration = duration;
         System.out.println("Buff aplicado: +" + attackBoost + " atk, +" +
-                           defenseBoost + " def, duração " + duration + " turnos");
+                           defenseBoost + " def, duraçao " + duration + " turnos");
     }
 
     public int getAttackBoost() {

@@ -29,7 +29,7 @@ public class Inventory {
     }
 
     public void show() {
-        System.out.println("\n=== INVENTÁRIO ===");
+        System.out.println("\n=== INVENTÁRIO ===\n");
         if (items.isEmpty()) {
             System.out.println("Inventário vazio");
             return;
